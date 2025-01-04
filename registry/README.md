@@ -3,8 +3,12 @@
 <br>
 
 Dieser Ordner enthält die Eureka-Registry für den Email-Check.
+
 Vorlage: [dieses Tutorial auf *baeldung.com*](https://www.baeldung.com/spring-cloud-netflix-eureka#Eureka)
 
+<br>
+
+Schritte: 
 * in `pom.xml`: Dependencies `spring-cloud-starter-netflix-eureka-server` und `spring-cloud-starter-parent`
 * Konfigurationswerte in `application.properties`
 * Annotation `@EnableEurekaServer` für Einstiegsklasse
@@ -28,3 +32,5 @@ Kompletter Fehlertext:
 <br>
 
 Laut [diesem Issue](https://github.com/spring-cloud/spring-cloud-netflix/issues/1195) verschwindet dieser Text sobald der erste Client sich registriert hat
+
+<br>
