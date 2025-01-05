@@ -1,55 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Email-Checker: Frontend</title>
+    <title>Email-Checker: Übersicht</title>
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="email-checker.css">
 </head>
 <body>
 
-  <h1>Email-Checker: Frontend</h1>
+  <h1>Email-Checker: Übersicht</h1>
 
-  <input id="inputEmailAdresse"
-         type="text"
-         placeholder="Email-Adresse eingeben"
-         maxlength="40">
-
-  <button onclick="checkEmailAdresse()">Email-Adresse überprüfen</button>
-  <button onclick="resetEingabefeld()" >Zurücksetzen</button>
-
-  <h2>Spam-Score-Werte</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Spam-Score</th>
-        <th>Beschreibung</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>0</td>
-        <td>Keine Fälle für Verwendung der Email-Adresse zum Spamming bekannt.</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Einzelne Fälle für Verwendung der Email-Adresse zum Spamming bekannt.</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Mehrere Fälle für Verwendung der Email-Adresse zum Spamming bekannt.</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Viele Fälle für Verwendung der Email-Adresse zum Spam bekannt.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>
-    Wenn die Email-Adresse syntaktisch nicht korrekt ist, dann wird kein Spam-Score-Wert
-    angezeigt.
-  </p>
-
-  <script src="emailChecker.js"></script>  
+  <ul>
+    <li><a href="./email-checker.html" >Email-Checker</a></li>
+    <li><a href="./api/v1/instanzen"   >Instanzen-Info von Eureka-Server (JSON)</a></li>
+  </ul>
 
 </body>
