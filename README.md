@@ -1,4 +1,18 @@
+# Email-Checker mit Eureka-Server als Service Registry #
+
+<br>
+
+
+
+<br>
+
+----
+
 ## Services und Port-Nummern ##
+
+<br>
+
+Die Reihenfolge in der folgenden Tabelle ist auch die empfohlene Startreihenfolge.
 
 <br>
 
