@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+/**
+ * REST-Controller für REST-Endpunkt, um Spam-Score für eine Email-Adresse abzufragen. 
+ */
 @RestController
 @RequestMapping( "/api/v1" )
 public class SpamScoreRestController {
@@ -59,7 +62,8 @@ public class SpamScoreRestController {
         
         final int spamScore = berechneSpamScore( emailAdresse );
         
-        return ResponseEntity.status( OK ).body( spamScore );
+        return ResponseEntity.status( OK )
+                             .body( spamScore );
     }
     
     
@@ -69,17 +73,18 @@ public class SpamScoreRestController {
      * 
      * Bedeutung Spam-Score-Werte:
      * <ul>
-     * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming</li>
-     * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming</li>
-     * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming</li>
-     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spam</li>
+     * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
+     * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
+     * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
+     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spam bekannt</li>
      * </ul>
      * 
      * @param emailAdresse Email-Adresse, muss syntaktisch korrekt sein!
      * 
      * @return Spam-Score von 0 bis 3. In 70% der Fälle wird als Spam-Score 0 
      *         zurückgegeben (keine Fälle für Verwendung der Email-Adresse zum
-     *         Spamming bekannt).
+     *         Spamming bekannt); die Scores 1 bis 3 werden in je 10 % der
+     *         Fälle zurückgegeben.
      */
     private int berechneSpamScore( String emailAdresse ) {
         
