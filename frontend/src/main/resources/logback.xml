@@ -1,0 +1,33 @@
+<configuration>
+
+    <!-- Ein Appender ist ein Ziel für Log-Nachrichten, z.B. die Konsole, eine Datei 
+         oder ein externes System -->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Platzhalterwert für Dateiname erzeugen -->
+    <timestamp key="startsekunde" datePattern="yyyy-MM-dd_HH.mm.ss"/>
+
+    <!-- Appender nur für Datei mit Log-Nachrichten vom Load-Balancer -->
+    <appender name="LOAD_BALANCER_DATEI_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>LoadBalancer-${startsekunde}.log</file>       
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+		<filter class="de.eldecker.spring.emailchecker.frontend.restclient.LogFileFilter" />
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <!-- Logger für Paket org.springframework.cloud.client.loadbalancer -->
+    <logger name="org.springframework.cloud.client.loadbalancer" level="debug" additivity="false">
+        <appender-ref ref="LOAD_BALANCER_DATEI_LOG" />
+    </logger>
+
+</configuration>
