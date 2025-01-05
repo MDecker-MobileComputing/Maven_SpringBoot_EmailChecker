@@ -8,7 +8,7 @@ Vorlage: [dieses Tutorial auf *baeldung.com*](https://www.baeldung.com/spring-cl
 
 <br>
 
-Schritte: 
+**Schritte:**
 * in `pom.xml`: Dependencies `spring-cloud-starter-netflix-eureka-server` und `spring-cloud-starter-parent`
 * Konfigurationswerte in `application.properties`
 * Annotation `@EnableEurekaServer` für Einstiegsklasse
