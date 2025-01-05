@@ -24,7 +24,8 @@ public class SpamScoreRestController {
 
     private static Logger LOG = LoggerFactory.getLogger( SpamScoreRestController.class );
     
-    /** Regulärer Ausdruck für Syntax-Prüfung einer E-Mail-Adresse. */
+    
+    /** Regulärer Ausdruck für Syntax-Prüfung einer E-Mail-Adresse ohne Unterscheidung Groß-/Kleinschreibung. */
     private static final Pattern REGEXP_EMAIL = 
             Pattern.compile( "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", CASE_INSENSITIVE );
 
@@ -54,7 +55,7 @@ public class SpamScoreRestController {
             
             LOG.warn( "Ungueltige E-Mail-Adresse erhalten: {}", emailAdresse );
             return ResponseEntity.status( BAD_REQUEST )
-                                 .header( "X-FEHLERMELDUNG", "Email-Adresse syntaktisch ungueltig" )
+                                 .header( "X-FEHLERMELDUNG", "Email-Adresse syntaktisch ungueltig." )
                                  .body( -1 );
         }
         
