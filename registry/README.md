@@ -1,4 +1,4 @@
-# Eureka-Registry für Email-Checker #
+# Email-Checker: Eureka-Registry #
 
 <br>
 

@@ -8,8 +8,8 @@ jobs:
     strategy:
       matrix:
         microservice_name:
-        - emailscore
         - frontend
+        - spamscore        
         - registry
     steps:
     - name: Git-Repo auschecken
