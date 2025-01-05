@@ -1,0 +1,32 @@
+name: Alle Microservices im Repo kompilieren
+on:
+  push:
+    branches: [ "master" ]
+jobs:
+  job-build-all-microservices:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        microservice_name:
+        - emailscore
+        - frontend
+        - registry
+    steps:
+    - name: Git-Repo auschecken
+      uses: actions/checkout@v4
+    - name: JDK einrichten
+      uses: actions/setup-java@v4
+      with:
+        java-version: '23'
+        distribution: 'temurin'
+        cache: maven
+    - name: Permission-Bit für Maven Wrapper setzen
+      run: chmod +x ./${{ matrix.microservice_name }}/mvnw
+    - name: ${{ matrix.microservice_name }} bauen
+      run: ./mvnw --batch-mode clean package
+      working-directory: ${{ matrix.microservice_name }}
+    - name: FatJar-Datei von MS1 ${{ matrix.microservice_name }} veröffentlichen
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.microservice_name }}-fatjar
+        path: ${{ matrix.microservice_name }}/target/*-*-SNAPSHOT.jar
