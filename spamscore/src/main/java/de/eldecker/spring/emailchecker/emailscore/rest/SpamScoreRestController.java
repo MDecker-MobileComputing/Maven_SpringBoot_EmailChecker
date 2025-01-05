@@ -72,32 +72,35 @@ public class SpamScoreRestController {
      * Spam-Score für die als Argument übergebene E-Mail-Adresse berechnen.
      * <br><br>
      * 
-     * Bedeutung Spam-Score-Werte:
+     * Bedeutung Spam-Score-Werte (Häufigkeit in Klammer)
      * <ul>
-     * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
-     * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
-     * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
-     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spam bekannt</li>
+     * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming bekannt (30%).</li>
+     * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming bekannt (40%).</li>
+     * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming bekannt (20%).</li>
+     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spam bekannt (10%).</li>
      * </ul>
      * 
      * @param emailAdresse Email-Adresse, muss syntaktisch korrekt sein!
      * 
-     * @return Spam-Score von 0 bis 3. In 70% der Fälle wird als Spam-Score 0 
-     *         zurückgegeben (keine Fälle für Verwendung der Email-Adresse zum
-     *         Spamming bekannt); die Scores 1 bis 3 werden in je 10 % der
-     *         Fälle zurückgegeben.
+     * @return Spam-Score von 0 bis 3
      */
     private int berechneSpamScore( String emailAdresse ) {
         
         final int hashWert = Math.abs(emailAdresse.hashCode() ) % 10; // hashWert zwischen 0 und 9
         switch ( hashWert ) {
         
-            case 0: return 1; // Einzelne Fälle für Verwendung der Email-Adresse zum Spamming
-            case 1: return 2; // Mehrere  Fälle für Verwendung der Email-Adresse zum Spamming
-            case 2: return 3; // Viele    Fälle für Verwendung der Email-Adresse zum Spamming
-        
-            default: // 70 % der Fälle: Keine Fälle für Verwendung der Email-Adresse zum Spamming
-                return 0;
+            case 0: 
+            case 1:
+            case 2:
+            case 3: return 1; // 40%                
+                
+            case 4:              
+            case 5: return 2; // 20%
+            
+            case 6: return 3; // 10%
+                    
+            default:
+                return 0; // 30%
         }
     }
 
