@@ -2,11 +2,11 @@
 
 <br>
 
-| Name                    | Port-Nummer                   |
-| ----------------------- | ----------------------------- |
-| Eureka Service Registry | [8761](http://localhost:8761) |
-| Spam-Score-API #1       | [8010](http://localhost:8010) |
-| Spam-Score-API #2       | [8020](http://localhost:8020) |
-| Email-Checker           | [8080](http://localhost:8080) |
+| Name                    | Port-Nummer                   | Unterordner              |
+| ----------------------- | ----------------------------- | -------------------------|
+| Eureka Service Registry | [8761](http://localhost:8761) | [registry/](registry/)   |
+| Spam-Score-API #1       | [8010](http://localhost:8010) | [spamscore/](spamscore/) |
+| Spam-Score-API #2       | [8020](http://localhost:8020) |                          |
+| Frontend                | [8080](http://localhost:8080) | [frontend/](frontend/)   |
 
 <br>
