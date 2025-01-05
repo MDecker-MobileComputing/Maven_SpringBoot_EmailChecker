@@ -26,10 +26,17 @@
 
   <h1>REST-API für Abfrage SPAM-Score von Email-Adressen</h1>
 
-  <h2>Beispiel Aufrufe für gültige Email-Adressen:</h2>
+  <h2>Beispiel-Aufrufe für gültige Email-Adressen:</h2>
   <ul>
-    <li><a href="api/v1/emailSpamScore?email_adresse=hans@wiwi.de">hans@wiwi.de</a></li>
-    <li><a href="api/v1/emailSpamScore?email_adresse=nina@info.de">nina@info.com</a></li>
+    <li><a href="api/v1/emailSpamScore?email_adresse=hans@wiwi.de"   >hans@wiwi.de</a></li>
+    <li><a href="api/v1/emailSpamScore?email_adresse=nina@infos.com" >nina@infos.com</a></li>
+  </ul>
+
+  <h2>Beispiel-Aufrufe für ungültige Email-Adressen:</h2>
+  <ul>
+    <li><a href="api/v1/emailSpamScore?email_adresse=hanswiwi.de" >hanswiwi.de (kein "@")</a></li>
+    <li><a href="api/v1/emailSpamScore?email_adresse=nina@info"   >nina@info (keine Top-Devel-Domain)</a></li>
+    <li><a href="api/v1/emailSpamScore?email_adresse=@wiwi.de"    >@wiwi.de (kein Nutzername vor "@")</a></li>
   </ul>
 
 </body>

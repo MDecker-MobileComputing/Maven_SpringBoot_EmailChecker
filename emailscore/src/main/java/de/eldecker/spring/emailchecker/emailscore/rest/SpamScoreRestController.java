@@ -28,6 +28,7 @@ public class SpamScoreRestController {
     
     /**
      * Liefert den Spam-Score für die als URL-Parameter übergebene E-Mail-Adresse zurück.
+     * Für Interpreation der Spam-Score-Werte siehe Methode {@link #berechneSpamScore(String)}.
      * <br><br>
      * 
      * Beispiel-URL für lokalen Aufruf auf Portnummer 8010:
@@ -37,7 +38,7 @@ public class SpamScoreRestController {
      * 
      * @param emailAdresse Email-Adresse aus URL-Parameter "email_adresse"
      * 
-     * @return Wenn Email-Adresse syntaktisch korrekt, dann Spam-Score zwischen 1 und 10 
+     * @return Wenn Email-Adresse syntaktisch korrekt, dann Spam-Score zwischen 0 und 3 
      *         (HTTP-Status: 200 OK), sonst -1 (HTTP-Status 400 Bad Request).         
      */
     @GetMapping( "/emailSpamScore" )
@@ -56,10 +57,42 @@ public class SpamScoreRestController {
         
         LOG.info( "Anfrage fuer E-Mail-Adresse erhalten: {}", emailAdresse );
         
-        final int hashWert = Math.abs( emailAdresse.hashCode() );
-        final int spamScore = ( hashWert % 10 ) + 1;
+        final int spamScore = berechneSpamScore( emailAdresse );
         
         return ResponseEntity.status( OK ).body( spamScore );
     }
     
+    
+    /**
+     * Spam-Score für die als Argument übergebene E-Mail-Adresse berechnen.
+     * <br><br>
+     * 
+     * Bedeutung Spam-Score-Werte:
+     * <ul>
+     * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming</li>
+     * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming</li>
+     * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming</li>
+     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spam</li>
+     * </ul>
+     * 
+     * @param emailAdresse Email-Adresse, muss syntaktisch korrekt sein!
+     * 
+     * @return Spam-Score von 0 bis 3. In 70% der Fälle wird als Spam-Score 0 
+     *         zurückgegeben (keine Fälle für Verwendung der Email-Adresse zum
+     *         Spamming bekannt).
+     */
+    private int berechneSpamScore( String emailAdresse ) {
+        
+        final int hashWert = Math.abs(emailAdresse.hashCode() ) % 10; // hashWert zwischen 0 und 9
+        switch ( hashWert ) {
+        
+            case 0: return 1; // Einzelne Fälle für Verwendung der Email-Adresse zum Spamming
+            case 1: return 2; // Mehrere  Fälle für Verwendung der Email-Adresse zum Spamming
+            case 2: return 3; // Viele    Fälle für Verwendung der Email-Adresse zum Spamming
+        
+            default: // 70 % der Fälle: Keine Fälle für Verwendung der Email-Adresse zum Spamming
+                return 0;
+        }
+    }
+
 }
