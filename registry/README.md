@@ -4,6 +4,9 @@
 
 Dieser Ordner enthält die Eureka-Registry für den Email-Check.
 
+Die Instanzen der [REST-API für den Spam-Score](../spamscore/) registrieren sich bei der Eureka-Registry,
+damit sie vom [Frontend](../frontend/) gefunden werden.
+
 Vorlage: [dieses Tutorial auf *baeldung.com*](https://www.baeldung.com/spring-cloud-netflix-eureka#Eureka)
 
 <br>
