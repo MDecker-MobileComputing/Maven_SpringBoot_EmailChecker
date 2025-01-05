@@ -47,7 +47,7 @@ public class EmailCheckRestController {
             Pattern.compile( "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", CASE_INSENSITIVE );    
     
     
-    /** Bean für Abfrage Spam-Score bei REST-API. */
+    /** Bean für Abfrage Spam-Score bei REST-API inkl. <i>client-seitiges Load Balancing</i>. */
     @Autowired
     private SpamScoreAbfrageClient _spamScoreClient;
 
