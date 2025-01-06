@@ -53,7 +53,7 @@ public class SpamScoreAbfrageClient {
      * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
      * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
      * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
-     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spam bekannt</li>
+     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spamming bekannt</li>
      * </ul>
      * 
      * @param emailAdresse Email-Adresse (sollte schon auf syntaktische Korrektheit geprüft sein)

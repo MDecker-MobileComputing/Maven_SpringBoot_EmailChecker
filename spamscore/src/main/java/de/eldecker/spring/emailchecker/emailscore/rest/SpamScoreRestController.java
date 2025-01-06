@@ -77,7 +77,7 @@ public class SpamScoreRestController {
      * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming bekannt (30%).</li>
      * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming bekannt (40%).</li>
      * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming bekannt (20%).</li>
-     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spam bekannt (10%).</li>
+     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spamming bekannt (10%).</li>
      * </ul>
      * 
      * @param emailAdresse Email-Adresse, muss syntaktisch korrekt sein!
