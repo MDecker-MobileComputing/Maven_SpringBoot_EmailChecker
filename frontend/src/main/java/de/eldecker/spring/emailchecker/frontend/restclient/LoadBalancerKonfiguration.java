@@ -16,14 +16,14 @@ public class LoadBalancerKonfiguration {
 
     
     /**
-     * Objekt für REST-Abfrage (REST-Client), konfiguriert für client-seitiges Load Balancing;
+     * Objekt für REST-Abfrage (REST-Client), konfiguriert für <i>client-seitiges Load Balancing</i>;
      * siehe Annotation {@code LoadBalanced}.
      * <br><br>
      *
-     * Offizielle Doku zu {@code RestTemplate} mit dem Spring Load Balancer:
+     * Offizielle Doku zu {@code RestTemplate} mit <i>Spring Load Balancer</i>:
      * <a href="https://bit.ly/3Pmo2UV">siehe hier</a>
      *
-     * @return REST-Client-Objekt
+     * @return REST-Client-Objekt, konfiguriert für <i>Load Balancing</i>
      */    
     @Bean
     @LoadBalanced
