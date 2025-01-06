@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * REST-Controller mit Endpunkt zur Anzeige der programmatisch abgefragten
  * Service-Discovery-Ergebnisse.  
+ * <br><br>
+ * 
+ * Beispielantwort: https://gist.github.com/MDecker-MobileComputing/5f3a11562c37d145a7eb34835648604c
  */
 @RestController
 @RequestMapping( "/api/v1" )
