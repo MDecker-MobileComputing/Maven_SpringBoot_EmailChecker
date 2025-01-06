@@ -1,6 +1,5 @@
 package de.eldecker.spring.emailchecker.emailscore.rest;
 
-import static java.lang.Integer.parseInt;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
