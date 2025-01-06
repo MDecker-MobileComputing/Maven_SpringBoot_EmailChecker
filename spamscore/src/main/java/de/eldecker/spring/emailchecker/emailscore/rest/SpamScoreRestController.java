@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,9 @@ public class SpamScoreRestController {
     private static final Pattern REGEXP_EMAIL = 
             Pattern.compile( "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", CASE_INSENSITIVE );
 
+    @Autowired
+    private EmailAdressenProtokoll _emailProtokoll;
+    
     
     /**
      * Liefert den Spam-Score für die als URL-Parameter übergebene E-Mail-Adresse zurück.
@@ -62,6 +66,7 @@ public class SpamScoreRestController {
         LOG.info( "Anfrage fuer E-Mail-Adresse erhalten: {}", emailAdresse );
         
         final int spamScore = berechneSpamScore( emailAdresse );
+        _emailProtokoll.protokolliereEmailAdresse( emailAdresse + ": " + spamScore );
         
         return ResponseEntity.status( OK )
                              .body( spamScore );
