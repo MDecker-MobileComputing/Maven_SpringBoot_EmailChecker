@@ -1,6 +1,8 @@
 package de.eldecker.spring.emailchecker.frontend.restclient;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,10 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
+
 
 /**
  * Bean, um Spam-Score für eine Email-Adresse von einer Instanz der entsprechenden REST-API,
@@ -23,26 +29,51 @@ public class SpamScoreAbfrageClient {
 
     private static Logger LOG = LoggerFactory.getLogger( SpamScoreAbfrageClient.class );
     
+    /** Zufallsgenerator für Auswahl Service-Instanz. */
+    private Random _zufallsGenerator = new Random();
+    
+    /** Objekt für HTTP-Request */
+    private RestTemplate _restTemplate = new RestTemplate();
+        
+    /** Bean für programmatische Abfrage der verfügbaren REST-API-Instanzen. */
+    @Autowired
+    private EurekaClient _eurekaClient;
+    
     
     /**
-     * In der URL wird anstelle der Domain die Service-ID "spam-score-api" verwendet.     
-     * Diese Service-ID ist in der Applikation, die die REST-API zur verfügung stellt,
-     * in der Konfigurationsdatei {@code application.properties} unter dem Schlüssel 
-     * {@code spring.application.name} definiert. 
-     * <br><br>
+     * Zufällige Auswahl einer Instanz der Spam-Score-API.
      * 
-     * URL des REST-Endpunkts: {@code api/v1/emailSpamScore }
+     * @return Optional enthält Basis-URL falls es mindest eines Instanz gibt;
+     *         Beispiel: {@code http://localhost:8020}
      */
-    private static final String REST_API_URL = "http://spam-score-api/api/v1/emailSpamScore";
-    
-    
-    /** 
-     * Bean für HTTP-Request mit client-seitigem Load Balancing, siehe Klasse
-     * {@link LoadBalancerKonfiguration} für Konfiguration.
-     */
-    @Autowired
-    private RestTemplate _restTemplate;
+    private Optional<String> holeServiceInstanzHost() {
         
+        final Application application = _eurekaClient.getApplication( "spam-score-api" );
+        final List<InstanceInfo> instanceInfoList = application.getInstances();
+        
+        final int anzahlInstanzen = instanceInfoList.size();
+        if ( anzahlInstanzen == 0 ) {
+            
+            LOG.error( "Keine einzige Instanz der Spam-Score-API gefunden!" );
+            return Optional.empty();
+            
+        } else {
+            
+            LOG.info( "Anzahl Instanzen Spam-Score-API gefunden: {}", anzahlInstanzen );
+        }
+        
+        final int zufallsIndex = _zufallsGenerator.nextInt( anzahlInstanzen ); 
+        final InstanceInfo zufallsInstanz = instanceInfoList.get( zufallsIndex );
+        
+        final String hostName    = zufallsInstanz.getHostName();
+        final int    port        = zufallsInstanz.getPort();
+        final String hostUndPort = "http://" + hostName + ":" + port;
+        LOG.info( "Ausgewählte Instanz Spam-Score-API mit Index {}: {}", 
+                  zufallsIndex, hostUndPort );
+        
+        return Optional.of( hostUndPort );
+    }
+    
     
     /**
      * Spam-Score für eine Email-Adresse von REST-API abfragen.
@@ -65,10 +96,18 @@ public class SpamScoreAbfrageClient {
      */
     public Optional<Integer> holeSpamScore( String emailAdresse ) {
 
-        final String url =
-                UriComponentsBuilder.fromUriString( REST_API_URL ) 
-                                    .queryParam( "email_adresse", emailAdresse )
-                                    .toUriString();        
+        final Optional<String> hostOptional = holeServiceInstanzHost( );
+        if ( hostOptional.isEmpty() ) {
+            
+            return Optional.empty(); 
+        }
+        
+        String url = hostOptional.get() + "/api/v1/emailSpamScore";
+        url = UriComponentsBuilder.fromUriString( url ) 
+                                  .queryParam( "email_adresse", emailAdresse )
+                                  .toUriString();
+        LOG.info( "Komplette URL Abfrage Spam-Score: {}", url );
+        
         try {
 
             final ResponseEntity<Integer> responseEntity =
