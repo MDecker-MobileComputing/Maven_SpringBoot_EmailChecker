@@ -1,19 +1,17 @@
 package de.eldecker.spring.emailchecker.emailscore.rest;
 
-import static java.lang.String.format;
-import static java.time.format.DateTimeFormatter.ofPattern;
-import static java.time.LocalDateTime.now;
+import static java.lang.Integer.parseInt;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
+import static java.time.LocalDateTime.now;
+import static java.time.format.DateTimeFormatter.ofPattern;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
@@ -34,16 +32,24 @@ public class EmailAdressenProtokoll {
 
     private static Logger LOG = LoggerFactory.getLogger( EmailAdressenProtokoll.class );
     
-    /** Objekt für Datum/Zeit am Anfang von Dateiname. */
+    /** Objekt für Datum/Zeit am Anfang von Dateiname für Log-Datei. */
     private static final DateTimeFormatter DATUMSFORMATIERER = ofPattern( "yyyy-MM-dd_HH-mm" );
     
-    /** Dateiname mit Portnummer, wird lazy erzeugt. */
+    /** 
+     * Dateiname mit Portnummer, wird lazy erzeugt. 
+     * Beispielwert: {@code 2025-01-06_14-47_email-adressen_8010.log}
+     */
     private String _dateiname = null;
     
     /** Bean zur Abfrage der Portnummer. */
     @Autowired
     private Environment _environment;
     
+    
+    /**
+     * Schreibt leere Zeile, damit Datei gleich beim Hochfahren des Programms angelegt
+     * wird. 
+     */
     @PostConstruct
     public void initialisierung() {
         
@@ -54,15 +60,22 @@ public class EmailAdressenProtokoll {
     /**
      * Eintrag in Protokolldatei erzeugen.
      * 
-     * @param emailAdresse Email-Adresse
-     * 
-     * @param spamScore Spam-Score von {@code Email-Adresse}
+     * @param zeile Zeile die in Protokolldatei geschrieben (angehängt) werden soll.
      */
     public void protokolliereEmailAdresse( String zeile ) {
         
         if ( _dateiname == null ) {
             
             final String serverPort = _environment.getProperty( "server.port", "portunbekannt" );
+            
+            try {
+                
+                parseInt( serverPort );
+            }
+            catch ( NumberFormatException ex ) {
+                
+                LOG.warn( "Server-Port konnte nicht bestimmt werden!" );
+            }
 
             final String datumZeit = DATUMSFORMATIERER.format( now() );
             
