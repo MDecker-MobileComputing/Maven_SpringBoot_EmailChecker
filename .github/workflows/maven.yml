@@ -8,9 +8,9 @@ jobs:
     strategy:
       matrix:
         microservice_name:
-        - frontend
-        - spamscore        
-        - registry
+        - 1_registry 
+        - 2_spamscore
+        - 3_frontend
     steps:
     - name: Git-Repo auschecken
       uses: actions/checkout@v4
