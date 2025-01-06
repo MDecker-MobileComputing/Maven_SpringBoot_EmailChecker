@@ -48,7 +48,10 @@ public class EmailAdressenProtokoll {
     
     /**
      * Schreibt leere Zeile, damit Datei gleich beim Hochfahren des Programms angelegt
-     * wird. 
+     * wird. Das kann aber nicht im Konstruktor gemacht werden (der vor einer mit
+     * {@code PostConstruct} annotierten Methode ausgeführt wird), weil sonst
+     * die {@code Environment}-Bean für das Auslesen der Portnummer noch nicht
+     * zur Verfügung steht. 
      */
     @PostConstruct
     public void initialisierung() {
@@ -66,19 +69,15 @@ public class EmailAdressenProtokoll {
         
         if ( _dateiname == null ) {
             
-            final String serverPort = _environment.getProperty( "server.port", "portunbekannt" );
+            final String dummyPort = "portUnbekannt";
             
-            try {
-                
-                parseInt( serverPort );
-            }
-            catch ( NumberFormatException ex ) {
+            final String serverPort = _environment.getProperty( "server.port", dummyPort );
+            if ( serverPort.equals( dummyPort ) ) {
                 
                 LOG.warn( "Server-Port konnte nicht bestimmt werden!" );
             }
 
             final String datumZeit = DATUMSFORMATIERER.format( now() );
-            
             _dateiname = String.format( "%s_email-adressen_%s.log", datumZeit, serverPort );
             
             LOG.info( "Dateiname Email-Adressen-Protokoll: {}", _dateiname );
