@@ -2,11 +2,23 @@
 
 <br>
 
-
+Dieses Repo enthält drei auf *Spring Boot* basierende Maven-Projekte, die zusammen einen Email-Checker 
+realisieren. Es soll damit *client-seitiges Load Balancing* unter Verwendung eines Eureka-Servers
+als Service Registry demonstriert werden.
 
 <br>
 
 ----
+
+## Screenshot
+
+<br>
+
+![Screenshot von Frontend mit Ergebnis von Email-Checker](screenshot_1.png)
+
+<br>
+
+---
 
 ## Services und Port-Nummern ##
 
