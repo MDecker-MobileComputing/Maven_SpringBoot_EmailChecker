@@ -2,7 +2,7 @@
 
 <br>
 
-Dieses Repo enthält drei auf *Spring Boot* basierende Maven-Projekte, die zusammen einen Email-Checker 
+Dieses Repo enthält drei auf *Spring Boot* basierende Maven-Projekte, die zusammen einen Email-Checker
 realisieren. Es soll damit *client-seitiges Load Balancing* unter Verwendung eines Eureka-Servers
 als Service Registry demonstriert werden.
 
@@ -34,5 +34,15 @@ Die Reihenfolge in der folgenden Tabelle ist auch die empfohlene Startreihenfolg
 | Spam-Score-API #1       | [8010](http://localhost:8010) | [2_spamscore/](2_spamscore/) |
 | Spam-Score-API #2       | [8020](http://localhost:8020) |                              |
 | Frontend                | [8080](http://localhost:8080) | [3_frontend/](3_frontend/)   |
+
+<br>
+
+----
+
+## License ##
+
+<br>
+
+See the [LICENSE file](LICENSE.md) for license rights and limitations (BSD 3-Clause License).
 
 <br>
