@@ -27,9 +27,9 @@ import jakarta.annotation.PostConstruct;
  * zu schreiben. 
  */
 @Component
-public class EmailAdressenProtokoll {
+public class EmailAdressenProtokollierer {
 
-    private static Logger LOG = LoggerFactory.getLogger( EmailAdressenProtokoll.class );
+    private static Logger LOG = LoggerFactory.getLogger( EmailAdressenProtokollierer.class );
     
     /** Objekt für Datum/Zeit am Anfang von Dateiname für Log-Datei. */
     private static final DateTimeFormatter DATUMSFORMATIERER = ofPattern( "yyyy-MM-dd_HH-mm" );

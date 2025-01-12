@@ -31,7 +31,7 @@ public class SpamScoreRestController {
             Pattern.compile( "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", CASE_INSENSITIVE );
 
     @Autowired
-    private EmailAdressenProtokoll _emailProtokoll;
+    private EmailAdressenProtokollierer _emailProtokoll;
     
     
     /**
@@ -88,10 +88,10 @@ public class SpamScoreRestController {
      * @param emailAdresse Email-Adresse, muss syntaktisch korrekt sein!
      * 
      * @return Spam-Score von 0 bis 3
-     */
+     */        
     private int berechneSpamScore( String emailAdresse ) {
         
-        final int hashWert = Math.abs(emailAdresse.hashCode() ) % 10; // hashWert zwischen 0 und 9
+        final int hashWert = Math.abs( emailAdresse.hashCode() ) % 10; 
         switch ( hashWert ) {
         
             case 0: 
