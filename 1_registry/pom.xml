@@ -18,7 +18,7 @@
     <version>0.0.1-SNAPSHOT</version>
     
     <name>EmailChecker-EurekaRegistry</name>
-    <description>Eureka-Registry für Email-Checker</description>
+    <description>Eureka (Service Registry) für Email-Checker</description>
     
     <properties>
         <java.version>23</java.version>
