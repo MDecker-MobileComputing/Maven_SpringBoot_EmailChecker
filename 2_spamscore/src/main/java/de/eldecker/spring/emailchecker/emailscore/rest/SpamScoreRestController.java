@@ -28,8 +28,10 @@ public class SpamScoreRestController {
     
     /** Regulärer Ausdruck für Syntax-Prüfung einer E-Mail-Adresse ohne Unterscheidung Groß-/Kleinschreibung. */
     private static final Pattern REGEXP_EMAIL = 
-            Pattern.compile( "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", CASE_INSENSITIVE );
+            						Pattern.compile( "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", 
+            								         CASE_INSENSITIVE );
 
+    /** Bean um Email-Adresse samt Score in eine Datei zu schreiben. */
     @Autowired
     private EmailAdressenProtokollierer _emailProtokoll;
     
