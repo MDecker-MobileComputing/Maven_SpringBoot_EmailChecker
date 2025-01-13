@@ -52,7 +52,7 @@ public class SpamScoreRestController {
      *         (HTTP-Status: 200 OK), sonst -1 (HTTP-Status 400 Bad Request).         
      */
     @GetMapping( "/emailSpamScore" )
-    public ResponseEntity<Integer> getSpamScore( @RequestParam("email_adresse") String emailAdresse ) {
+    public ResponseEntity<Integer> getSpamScore( @RequestParam( "email_adresse" ) String emailAdresse ) {
     
         emailAdresse = emailAdresse.trim();
         
@@ -81,10 +81,10 @@ public class SpamScoreRestController {
      * 
      * Bedeutung Spam-Score-Werte (Häufigkeit in Klammer)
      * <ul>
-     * <li>0: Keine Fälle für Verwendung der Email-Adresse zum Spamming bekannt (30%).</li>
+     * <li>0: Keine    Fälle für Verwendung der Email-Adresse zum Spamming bekannt (30%).</li>
      * <li>1: Einzelne Fälle für Verwendung der Email-Adresse zum Spamming bekannt (40%).</li>
-     * <li>2: Mehrere Fälle für Verwendung der Email-Adresse zum Spamming bekannt (20%).</li>
-     * <li>3: Viele Fälle für Verwendung der Email-Adresse zum Spamming bekannt (10%).</li>
+     * <li>2: Mehrere  Fälle für Verwendung der Email-Adresse zum Spamming bekannt (20%).</li>
+     * <li>3: Viele    Fälle für Verwendung der Email-Adresse zum Spamming bekannt (10%).</li>
      * </ul>
      * 
      * @param emailAdresse Email-Adresse, muss syntaktisch korrekt sein!
