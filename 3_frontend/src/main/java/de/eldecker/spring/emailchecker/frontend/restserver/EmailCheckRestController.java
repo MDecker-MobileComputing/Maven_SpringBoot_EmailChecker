@@ -36,10 +36,10 @@ public class EmailCheckRestController {
     /** Dummy-Wert für Spam-Score, wenn die externe REST-API einen Fehler geliefert hat. */
     private static final int SPAM_SCORE_ERROR = -2;    
     
-    /** Bool'scher Wert wenn kein Syntax-Fehler in Email-Adresse entdeckt wurde. */
+    /** Bool'scher Wert für den Fall, dass kein Syntax-Fehler in Email-Adresse entdeckt wurde. */
     private static final boolean SYNTAX_KORREKT = true;
     
-    /** Bool'scher Wert wenn Syntax-Fehler in Email-Adresse entdeckt wurde. */
+    /** Bool'scher Wert für den Fall, dass Syntax-Fehler in Email-Adresse entdeckt wurde. */
     private static final boolean SYNTAX_FEHLER = false;
     
     /** Regulärer Ausdruck für Syntax-Prüfung einer E-Mail-Adresse ohne Unterscheidung Groß-/Kleinschreibung. */
@@ -107,7 +107,7 @@ public class EmailCheckRestController {
                 
                 result = new SpamCheckResult( emailAdresse,
                                               "Email-Adresse ist syntaktisch korrekt, Spam-Score konnte ermittelt werden.",
-                                              true, // syntaxOkay
+                                              SYNTAX_KORREKT,
                                               spamScore
                                             );                            
             }            
