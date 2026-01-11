@@ -17,7 +17,7 @@ jobs:
     - name: JDK einrichten
       uses: actions/setup-java@v4
       with:
-        java-version: '23'
+        java-version: '25'
         distribution: 'temurin'
         cache: maven
     - name: Permission-Bit für Maven Wrapper setzen
